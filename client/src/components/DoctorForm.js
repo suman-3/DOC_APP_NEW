@@ -1,18 +1,32 @@
 import { Button, Col, Form, Input, Row, TimePicker } from "antd";
 import moment from "moment";
-import React from "react";
+import React, { useState } from "react";
+import "./style.css";
 
-function DoctorForm({ onFinish, initivalValues }) {
+function DoctorForm({ onFinish, initialValues }) {
+  const [image, setImage] = useState("");
+
+  function convertToUrl(e) {
+    const reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = () => {
+      setImage(reader.result);
+    };
+    reader.onerror = (error) => {
+      console.log("Error", error);
+    };
+  }
+
   return (
     <Form
       layout="vertical"
       onFinish={onFinish}
       initialValues={{
-        ...initivalValues,
-        ...(initivalValues && {
+        ...initialValues,
+        ...(initialValues && {
           timings: [
-            moment(initivalValues?.timings[0], "HH:mm"),
-            moment(initivalValues?.timings[1], "HH:mm"),
+            moment(initialValues?.timings[0], "HH:mm"),
+            moment(initialValues?.timings[1], "HH:mm"),
           ],
         }),
       }}
@@ -79,6 +93,25 @@ function DoctorForm({ onFinish, initivalValues }) {
             <Input placeholder="Address" />
           </Form.Item>
         </Col>
+
+        <Col span={8} xs={24} sm={24} lg={10} className="flex">
+          <Form.Item
+            required
+            label="Profile"
+            name="profileimg"
+            rules={[{ required: true }]}
+          >
+            <Input
+              placeholder="Profile"
+              type="file"
+              accept="image/*"
+              onChange={convertToUrl}
+            />
+          </Form.Item>
+          {image ? (
+            <img src={image} alt="profile" width={50} height={50} />
+          ) : null}
+        </Col>
       </Row>
       <hr />
       <h1 className="card-title mt-3">Professional Information</h1>
@@ -106,11 +139,11 @@ function DoctorForm({ onFinish, initivalValues }) {
         <Col span={8} xs={24} sm={24} lg={8}>
           <Form.Item
             required
-            label="Fee Per Cunsultation"
-            name="feePerCunsultation"
+            label="Fee Per Consultation"
+            name="feePerConsultation"
             rules={[{ required: true }]}
           >
-            <Input placeholder="Fee Per Cunsultation" type="number" />
+            <Input placeholder="Fee Per Consultation" type="number" />
           </Form.Item>
         </Col>
         <Col span={8} xs={24} sm={24} lg={8}>
