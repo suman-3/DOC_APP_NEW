@@ -83,9 +83,6 @@ router.post("/get-user-info-by-id", authMiddleware, async (req, res) => {
   }
 });
 
-
-
-
 router.post("/apply-doctor-account", authMiddleware, async (req, res) => {
   try {
     const newdoctor = new Doctor({ ...req.body, status: "pending" });
@@ -116,8 +113,6 @@ router.post("/apply-doctor-account", authMiddleware, async (req, res) => {
     });
   }
 });
-
-
 
 router.post(
   "/mark-all-notifications-as-seen",
