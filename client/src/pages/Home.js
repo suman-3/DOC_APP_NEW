@@ -31,7 +31,7 @@ const tabList = [
 
 function Home() {
   const [doctors, setDoctors] = useState([]);
-  const [activeTabKey1, setActiveTabKey1] = useState("Neurologist");
+  const [activeTabKey1, setActiveTabKey1] = useState("All");
   const dispatch = useDispatch();
   const getData = async () => {
     try {
@@ -62,7 +62,7 @@ function Home() {
     All: (
       <Row gutter={20}>
         {doctors.map((doctor) => (
-          <Col  span={8} xs={24} sm={24} lg={8}  key={doctor.id}>
+          <Col  span={8} xs={24}  sm={24} lg={8}  key={doctor.id}>
             <Doctor doctor={doctor} />
           </Col>
         ))}
