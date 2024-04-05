@@ -62,7 +62,7 @@ function Home() {
     All: (
       <Row gutter={20}>
         {doctors.map((doctor) => (
-          <Col  span={8} xs={24}  sm={24} lg={8}  key={doctor.id}>
+          <Col span={8} xs={24} sm={24} lg={8} key={doctor.id}>
             <Doctor doctor={doctor} />
           </Col>
         ))}
@@ -83,11 +83,11 @@ function Home() {
               </Col>
             )
         )}
-         {doctors.filter((doctor) => doctor.specialization === "Neurologist").length === 0 && (
-      <Col span={24}>
-        <p>No Result Found</p>
-      </Col>
-    )}
+        {doctors.filter((doctor) => doctor.specialization === "Neurologist").length === 0 && (
+          <Col span={24}>
+            <p>No Result Found</p>
+          </Col>
+        )}
       </Row>
     ),
     Dermatologist: (
@@ -99,6 +99,11 @@ function Home() {
                 <Doctor doctor={doctor} />
               </Col>
             )
+        )}
+        {doctors.filter((doctor) => doctor.specialization === "Dermatologis").length === 0 && (
+          <Col span={24}>
+            <p>No Result Found</p>
+          </Col>
         )}
       </Row>
     ),
@@ -112,6 +117,11 @@ function Home() {
               </Col>
             )
         )}
+        {doctors.filter((doctor) => doctor.specialization === "EyeSpecialist").length === 0 && (
+          <Col span={24}>
+            <p>No Result Found</p>
+          </Col>
+        )}
       </Row>
     ),
     Orthopaedics: (
@@ -123,6 +133,11 @@ function Home() {
                 <Doctor doctor={doctor} />
               </Col>
             )
+        )}
+        {doctors.filter((doctor) => doctor.specialization === "Orthopaedics").length === 0 && (
+          <Col span={24}>
+            <p>No Result Found</p>
+          </Col>
         )}
       </Row>
     ),
