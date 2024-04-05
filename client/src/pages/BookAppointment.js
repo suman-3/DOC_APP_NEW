@@ -202,9 +202,9 @@ function BookAppointment() {
           </h1>
           <hr />
           <Row gutter={20} className="mt-5" align="middle">
-            <Col span={8} sm={24} xs={24} lg={8}>
+            <Col span={8} sm={24} xs={24} lg={8} className="doctorProfile">
               <img
-                src="https://thumbs.dreamstime.com/b/finger-press-book-now-button-booking-reservation-icon-online-149789867.jpg"
+                src={doctor.profileimg}
                 alt=""
                 width="100%"
                 height="400"

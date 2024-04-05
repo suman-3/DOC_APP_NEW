@@ -93,6 +93,16 @@ function DoctorForm({ onFinish, initialValues }) {
             <Input placeholder="Address" />
           </Form.Item>
         </Col>
+        <Col span={8} xs={24} sm={24} lg={8}>
+          <Form.Item
+            required
+            label="Profile Image"
+            name="profileimg"
+            rules={[{ required: true }]}
+          >
+            <Input placeholder="Paste URL" />
+          </Form.Item>
+        </Col>
 
       </Row>
       <hr />

@@ -62,7 +62,7 @@ function Home() {
     All: (
       <Row gutter={20}>
         {doctors.map((doctor) => (
-          <Col span={8} xs={24} sm={24} lg={8} key={doctor.id}>
+          <Col span={8} xs={24} sm={24} lg={14} key={doctor.id}>
             <Doctor doctor={doctor} />
           </Col>
         ))}
@@ -78,7 +78,7 @@ function Home() {
         {doctors.map(
           (doctor) =>
             doctor.specialization === "Neurologist" && (
-              <Col span={8} xs={24} sm={24} lg={8}>
+              <Col span={8} xs={24} sm={24} lg={14}>
                 <Doctor doctor={doctor} />
               </Col>
             )
@@ -95,7 +95,7 @@ function Home() {
         {doctors.map(
           (doctor) =>
             doctor.specialization === "Dermatologist" && (
-              <Col span={8} xs={24} sm={24} lg={8}>
+              <Col span={8} xs={24} sm={24} lg={14}>
                 <Doctor doctor={doctor} />
               </Col>
             )
@@ -112,7 +112,7 @@ function Home() {
         {doctors.map(
           (doctor) =>
             doctor.specialization === "EyeSpecialist" && (
-              <Col span={8} xs={24} sm={24} lg={8}>
+              <Col span={8} xs={24} sm={24} lg={14}>
                 <Doctor doctor={doctor} />
               </Col>
             )
@@ -129,7 +129,7 @@ function Home() {
         {doctors.map(
           (doctor) =>
             doctor.specialization === "Orthopaedics" && (
-              <Col span={8} xs={24} sm={24} lg={8}>
+              <Col span={8} xs={24} sm={24} lg={14}>
                 <Doctor doctor={doctor} />
               </Col>
             )
