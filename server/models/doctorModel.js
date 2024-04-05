@@ -29,10 +29,6 @@ const doctorSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    profileimg: {
-      type: String,
-      required: true,
-    },
     specialization: {
       type: String,
       required: true,
