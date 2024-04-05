@@ -83,6 +83,11 @@ function Home() {
               </Col>
             )
         )}
+         {doctors.filter((doctor) => doctor.specialization === "Neurologist").length === 0 && (
+      <Col span={24}>
+        <p>No Result Found</p>
+      </Col>
+    )}
       </Row>
     ),
     Dermatologist: (
