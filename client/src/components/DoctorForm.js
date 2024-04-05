@@ -94,24 +94,6 @@ function DoctorForm({ onFinish, initialValues }) {
           </Form.Item>
         </Col>
 
-        <Col span={8} xs={24} sm={24} lg={10} className="flex">
-          <Form.Item
-            required
-            label="Profile"
-            name="profileimg"
-            rules={[{ required: true }]}
-          >
-            <Input
-              placeholder="Profile"
-              type="file"
-              accept="image/*"
-              onChange={convertToUrl}
-            />
-          </Form.Item>
-          {image ? (
-            <img src={image} alt="profile" width={50} height={50} />
-          ) : null}
-        </Col>
       </Row>
       <hr />
       <h1 className="card-title mt-3">Professional Information</h1>
@@ -140,7 +122,7 @@ function DoctorForm({ onFinish, initialValues }) {
           <Form.Item
             required
             label="Fee Per Consultation"
-            name="feePerConsultation"
+            name="feePerCunsultation"
             rules={[{ required: true }]}
           >
             <Input placeholder="Fee Per Consultation" type="number" />
