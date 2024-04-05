@@ -125,7 +125,9 @@ p{
   border-bottom-left-radius: 10px;
 }
 
-.doctorProfile img{
-background-position: center;
-background-size: cover;
+
+
+.profileImg img{
+ border-radius: 15px;
+ margin-bottom: 7px;
 }
