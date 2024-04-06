@@ -117,7 +117,7 @@ router.post("/change-appointment-payment-status", authMiddleware, async (req, re
     const unseenNotifications = user.unseenNotifications;
     unseenNotifications.push({
       type: "appointment-status-changed",
-      message: `Money Send ${paymentStatus}`,
+      message: "Transaction Completed",
       onClickPath: "/appointments",
     });
 
