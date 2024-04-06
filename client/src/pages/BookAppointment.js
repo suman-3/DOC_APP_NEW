@@ -128,6 +128,7 @@ function BookAppointment() {
       dispatch(hideLoading());
     }
   };
+  
   const checkAvailability = async () => {
     try {
       dispatch(showLoading());

@@ -25,6 +25,11 @@ function Layout({ children }) {
       name: "Apply Doctor",
       path: "/apply-doctor",
       icon: "ri-hospital-line",
+    },
+    {
+      name: "Pay Fees",
+      path: "/pay-doctor",
+      icon: "ri-hospital-line",
     }
   ];
 
