@@ -5,7 +5,7 @@ import { showLoading, hideLoading } from "../redux/alertsSlice";
 import { toast } from "react-hot-toast";
 import axios from "axios";
 import { Table } from "antd";
-import moment from "moment";
+
 import { useParams } from "react-router-dom";
 
 function PayToDoctor() {
@@ -261,7 +261,7 @@ function PayToDoctor() {
 
             if (resposne.data.success) {
               toast.success("Payment Successfull");
-              window.location.reload();
+              // window.location.reload();
             }
             dispatch(hideLoading());
           } catch (error) {

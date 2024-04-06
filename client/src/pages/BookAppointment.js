@@ -5,8 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { showLoading, hideLoading } from "../redux/alertsSlice";
 import { toast } from "react-hot-toast";
 import axios from "axios";
-import { Navigate, useNavigate, useParams } from "react-router-dom";
-import DoctorForm from "../components/DoctorForm";
+import { useNavigate, useParams } from "react-router-dom";
 const moment = require("moment");
 
 function BookAppointment() {
