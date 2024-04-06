@@ -106,6 +106,36 @@ router.post("/change-appointment-status", authMiddleware, async (req, res) => {
     });
   }
 });
+router.post("/change-appointment-payment-status", authMiddleware, async (req, res) => {
+  try {
+    const { appointmentId, paymentStatus } = req.body;
+    const appointment = await Appointment.findByIdAndUpdate(appointmentId, {
+      paymentStatus,
+    });
+
+    const user = await User.findOne({ _id: appointment.userId });
+    const unseenNotifications = user.unseenNotifications;
+    unseenNotifications.push({
+      type: "appointment-status-changed",
+      message: `Money Send ${paymentStatus}`,
+      onClickPath: "/appointments",
+    });
+
+    await user.save();
+
+    res.status(200).send({
+      message: "Appointment payment status updated successfully",
+      success: true
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send({
+      message: "Error changing appointment payment status",
+      success: false,
+      error,
+    });
+  }
+});
 
 
 
