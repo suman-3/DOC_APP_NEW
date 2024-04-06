@@ -12,6 +12,7 @@ function PayToDoctor() {
   const [appointments, setAppointments] = useState([]);
   const [paymentSuccessful, setPaymentSuccessful] = useState(false); // State to track payment status
   const dispatch = useDispatch();
+  const [paymentStatus, setPaymentStatus] = useState(false);
   const params = useParams();
 
   const getPaymentDetails = async () => {
@@ -67,22 +68,42 @@ function PayToDoctor() {
       title: "Status",
       render: (text, record) => (
         <span>
-          {record.status === "approved" && !paymentSuccessful ? (
-            <h1
-              className="anchor px-2"
-              onClick={() => handlePayNow(record, "approved")}
-            >
-              Pay Now
-            </h1>
+          {record.paymentStatus ? (
+            <div className="d-flex">
+              <a
+                className="anchor px-2"
+                href="https://mail.google.com/mail/u/0/#inbox"
+                target="_blank"
+              >
+                View Receipt
+              </a>
+            </div>
           ) : (
-            <h1 className="anchor px-2">Waiting For Approval</h1>
+            <div className="d-flex">
+              {record.status !== "approved" ? (
+                <h1 className="anchor px-2">Waiting For Approval</h1>
+              ) : (
+                <h1
+                  className="anchor px-2"
+                  onClick={() => handlePayNow(record)}
+                >
+                  Pay Now
+                </h1>
+              )}
+            </div>
           )}
         </span>
       ),
     },
   ];
 
-  const PaymentSuccessFullMail = async (record) => {
+  const PaymentSuccessFullMail = async (
+    record,
+    order_id,
+    razorpay_payment_id,
+    method,
+    email
+  ) => {
     const serviceId = "service_cageyes";
     const templateId = "template_0qhdtmq";
     const publicKey = "XulQqyukcx5FEh9-P";
@@ -94,7 +115,7 @@ function PayToDoctor() {
     const doctor_name = doctor_full_name;
     const patient_name = record.userInfo.name;
     const patient_email = record.userInfo.email;
-    const message = `Payment of  ₹ ${record.doctorInfo.feePerCunsultation} Sucessfull`;
+    const message = `Payment of  ₹ ${record.doctorInfo.feePerCunsultation} Sucessfully Recieved`;
 
     const data = {
       service_id: serviceId,
@@ -106,6 +127,50 @@ function PayToDoctor() {
         patient_name: patient_name,
         patient_email: patient_email,
         message: message,
+        razorpay_payment_id: razorpay_payment_id,
+        order_id: order_id,
+        method: method,
+        email: email,
+      },
+    };
+
+    try {
+      const res = await axios.post(
+        "https://api.emailjs.com/api/v1.0/email/send",
+        data
+      );
+      console.log(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const PaymentMailToDoctor = async (record) => {
+    const serviceId = "service_cageyes";
+    const templateId = "template_2mu1wyw";
+    const publicKey = "XulQqyukcx5FEh9-P";
+
+    const doctor_full_name =
+      record.doctorInfo.firstName + " " + record.doctorInfo.lastName;
+    const doctor_email = record.doctorInfo.email;
+
+    const doctor_name = doctor_full_name;
+    const patient_name = record.userInfo.name;
+    const patient_email = record.userInfo.email;
+    const patient_id = record.userInfo._id;
+    const message = `${patient_name} paid  ₹ ${record.doctorInfo.feePerCunsultation} , for Appoinment`;
+
+    const data = {
+      service_id: serviceId,
+      template_id: templateId,
+      user_id: publicKey,
+      template_params: {
+        doctor_email: doctor_email,
+        doctor_name: doctor_name,
+        patient_name: patient_name,
+        patient_email: patient_email,
+        message: message,
+        patient_id: patient_id,
       },
     };
 
@@ -130,7 +195,7 @@ function PayToDoctor() {
     });
   };
 
-  const handlePayNow = async (record, status2) => {
+  const handlePayNow = async (record) => {
     try {
       const orderId = record.userInfo._id;
       const amount = record.doctorInfo.feePerCunsultation;
@@ -172,13 +237,21 @@ function PayToDoctor() {
           });
 
           setPaymentSuccessful(true);
-          PaymentSuccessFullMail(record);
+          setPaymentStatus(true);
+          PaymentSuccessFullMail(
+            record,
+            responseData.data.id,
+            response.razorpay_payment_id,
+            result_1.data.data.method,
+            result_1.data.data.email
+          );
+          PaymentMailToDoctor(record);
 
           try {
             dispatch(showLoading());
             const resposne = await axios.post(
-              "/api/doctor/change-appointment-status",
-              { appointmentId: record._id, status2 },
+              "/api/doctor/change-appointment-payment-status",
+              { appointmentId: record._id, paymentStatus: true },
               {
                 headers: {
                   Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -187,7 +260,8 @@ function PayToDoctor() {
             );
 
             if (resposne.data.success) {
-              toast.success(resposne.data.message);
+              toast.success("Payment Successfull");
+              // window.location.reload();
             }
             dispatch(hideLoading());
           } catch (error) {

@@ -208,7 +208,7 @@ function BookAppointment() {
                 src={doctor.profileimg}
                 alt=""
                 width="100%"
-                height="400"
+                height="300"
               />
             </Col>
             <Col span={8} sm={24} xs={24} lg={8}>
