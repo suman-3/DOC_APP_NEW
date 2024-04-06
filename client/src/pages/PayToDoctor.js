@@ -261,7 +261,7 @@ function PayToDoctor() {
 
             if (resposne.data.success) {
               toast.success("Payment Successfull");
-              // window.location.reload();
+              window.location.reload();
             }
             dispatch(hideLoading());
           } catch (error) {
