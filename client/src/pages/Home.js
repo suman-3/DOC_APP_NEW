@@ -100,7 +100,7 @@ function Home() {
               </Col>
             )
         )}
-        {doctors.filter((doctor) => doctor.specialization === "Dermatologis").length === 0 && (
+        {doctors.filter((doctor) => doctor.specialization === "Dermatologist").length === 0 && (
           <Col span={24}>
             <p>No Result Found</p>
           </Col>
