@@ -58,9 +58,9 @@ function BookAppointment() {
   };
 
   const SendMailToPatient = async () => {
-    const serviceId = "service_arm34iq";
-    const templateId = "template_o1jqbug";
-    const publicKey = "N-IGEW8XCOze79Iu6";
+    const serviceId = "service_qdtay4s";
+    const templateId = "template_0j5qcic";
+    const publicKey = "WmLP9TsYK7uswb6cT";
 
     const doctor_full_name = doctor.firstName + " " + doctor.lastName;
     const doctor_email = doctor.email;

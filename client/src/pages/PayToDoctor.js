@@ -104,9 +104,9 @@ function PayToDoctor() {
     method,
     email
   ) => {
-    const serviceId = "service_cageyes";
-    const templateId = "template_0qhdtmq";
-    const publicKey = "XulQqyukcx5FEh9-P";
+    const serviceId = "service_qdtay4s";
+    const templateId = "template_do3qf36";
+    const publicKey = "WmLP9TsYK7uswb6cT";
 
     const doctor_full_name =
       record.doctorInfo.firstName + " " + record.doctorInfo.lastName;
@@ -146,9 +146,9 @@ function PayToDoctor() {
   };
 
   const PaymentMailToDoctor = async (record) => {
-    const serviceId = "service_cageyes";
-    const templateId = "template_2mu1wyw";
-    const publicKey = "XulQqyukcx5FEh9-P";
+    const serviceId = "service_euv1h8i";
+    const templateId = "template_xuwpwqc";
+    const publicKey = "9oMH4J3kNVdtK-N-b";
 
     const doctor_full_name =
       record.doctorInfo.firstName + " " + record.doctorInfo.lastName;
